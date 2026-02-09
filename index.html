@@ -10,7 +10,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;500;800&display=swap');
         
         :root { font-family: 'Bricolage Grotesque', sans-serif; }
-        body { background-color: #020617; color: #f8fafc; }
+        body { background-color: #020617; color: #f8fafc; overflow-x: hidden; }
 
         .glass-card { 
             background: rgba(255, 255, 255, 0.02); 
@@ -24,53 +24,50 @@
             transform: translateY(-8px);
         }
 
-        .streak-glow {
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
         .emerald-gradient {
             background: linear-gradient(to bottom, #ffffff 20%, #10b981 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        @keyframes pulse-soft {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        /* Fix for long words on mobile */
+        .responsive-title {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
-        .animate-pulse-soft { animation: pulse-soft 3s infinite; }
     </style>
 </head>
 <body class="selection:bg-emerald-500/30">
 
-    <header class="relative pt-32 pb-20 px-6 overflow-hidden">
+    <header class="relative pt-24 md:pt-32 pb-20 px-4 overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-500/10 blur-[120px] rounded-full -z-10"></div>
         
         <div class="max-w-5xl mx-auto text-center">
             <div class="mb-10 flex justify-center">
-                <div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-700 rounded-[2.5rem] flex items-center justify-center text-5xl shadow-[0_0_50px_-10px_rgba(16,185,129,0.5)] border border-white/20">
+                <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-emerald-500 to-teal-700 rounded-[2rem] flex items-center justify-center text-5xl shadow-[0_0_50px_-10px_rgba(16,185,129,0.5)] border border-white/20">
                     <img src="app_icon.png" alt="CM" class="w-full h-full rounded-[2.5rem] object-cover" onerror="this.parentElement.innerHTML='🔥'">
                 </div>
             </div>
             
-            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 emerald-gradient">
+            <h1 class="responsive-title text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter mb-6 emerald-gradient leading-[0.9] px-2">
                 ConsistentMe
             </h1>
             
-            <p class="text-slate-400 text-xl md:text-2xl max-w-2xl mx-auto mb-12 font-light tracking-tight">
+            <p class="text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-12 font-light tracking-tight px-4">
                 Forge unbreakable habits. Track streaks, earn badges, and stay <span class="text-emerald-400 font-medium">consistent</span> even on your worst days.
             </p>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-                <div class="bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 px-10 py-5 rounded-2xl font-extrabold text-lg flex items-center justify-center gap-3 cursor-not-allowed">
-                    <i data-lucide="clock" class="animate-spin-slow"></i> COMING SOON
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16 px-6">
+                <div class="bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 px-8 py-4 rounded-2xl font-extrabold text-base md:text-lg flex items-center justify-center gap-3 cursor-not-allowed">
+                    <i data-lucide="clock"></i> COMING SOON
                 </div>
-                <a href="https://github.com/TJXLABS/ConsistentMe" class="glass-card px-10 py-5 rounded-2xl font-extrabold text-lg flex items-center justify-center gap-2 hover:bg-white/5 transition">
+                <a href="https://github.com/TJXLABS/ConsistentMe" class="glass-card px-8 py-4 rounded-2xl font-extrabold text-base md:text-lg flex items-center justify-center gap-2 hover:bg-white/5 transition">
                     <i data-lucide="github"></i> VIEW CODE
                 </a>
             </div>
 
-            <div class="inline-flex items-center gap-3 px-5 py-2 glass-card rounded-full text-xs font-bold text-amber-400 uppercase tracking-widest border-amber-500/20">
+            <div class="inline-flex items-center gap-3 px-5 py-2 glass-card rounded-full text-[10px] md:text-xs font-bold text-amber-400 uppercase tracking-widest border-amber-500/20">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
@@ -80,77 +77,52 @@
         </div>
     </header>
 
-    <section class="py-24 px-6 max-w-7xl mx-auto">
+    <section class="py-12 md:py-24 px-4 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6">
             
-            <div class="md:col-span-2 md:row-span-2 glass-card p-10 rounded-[3rem] flex flex-col justify-between group">
+            <div class="md:col-span-2 md:row-span-2 glass-card p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400 mb-8">
                         <i data-lucide="flame" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-3xl font-bold mb-4">The Streak Engine</h3>
-                    <p class="text-slate-400 text-lg leading-relaxed">Advanced tracking for daily, weekly, or monthly cadences. Includes a unique <span class="text-white">Habit Strength Meter</span> that visualizes your consistency over time.</p>
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4">The Streak Engine</h3>
+                    <p class="text-slate-400 text-base md:text-lg leading-relaxed">Advanced tracking for daily, weekly, or monthly cadences. Includes a unique <span class="text-white">Habit Strength Meter</span>.</p>
                 </div>
                 <div class="mt-8 pt-8 border-t border-white/5">
-                    <p class="text-[10px] font-black tracking-widest text-emerald-500 uppercase">Frequency: Multiple Completions Supported</p>
+                    <p class="text-[10px] font-black tracking-widest text-emerald-500 uppercase">Frequency: Multiple Completions Per Day</p>
                 </div>
             </div>
 
-            <div class="md:col-span-2 glass-card p-10 rounded-[3rem] border-red-500/10 hover:border-red-500/30">
+            <div class="md:col-span-2 glass-card p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] border-red-500/10 hover:border-red-500/30">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center text-red-400">
                         <i data-lucide="alert-circle"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">Emergency Mode</h3>
+                    <h3 class="text-xl md:text-2xl font-bold">Emergency Mode</h3>
                 </div>
-                <p class="text-slate-400">Tough day? Complete a reduced version of your habit to keep the streak alive without the burnout.</p>
+                <p class="text-slate-400 text-sm md:text-base">Tough day? Complete a reduced version of your habit to keep the streak alive.</p>
             </div>
 
-            <div class="glass-card p-8 rounded-[2.5rem] flex flex-col items-center text-center">
-                <div class="text-3xl mb-4">😊</div>
+            <div class="glass-card p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col items-center text-center">
+                <div class="text-2xl md:text-3xl mb-4">😊</div>
                 <h4 class="font-bold mb-2">Mood Sync</h4>
-                <p class="text-xs text-slate-500">Discover which habits actually boost your mental state.</p>
+                <p class="text-[10px] md:text-xs text-slate-500">Discover which habits actually boost your mental state.</p>
             </div>
 
-            <div class="glass-card p-8 rounded-[2.5rem] flex flex-col items-center text-center">
-                <div class="text-3xl mb-4">🏆</div>
+            <div class="glass-card p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col items-center text-center">
+                <div class="text-2xl md:text-3xl mb-4">🏆</div>
                 <h4 class="font-bold mb-2">22 Badges</h4>
-                <p class="text-xs text-slate-500">Unlock achievements as you hit major milestones.</p>
+                <p class="text-[10px] md:text-xs text-slate-500">Unlock achievements as you hit major milestones.</p>
             </div>
         </div>
     </section>
 
-    <section class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="p-8 glass-card rounded-3xl">
-                <i data-lucide="layout" class="text-emerald-500 mb-4"></i>
-                <h5 class="font-bold mb-2">17 Premade Routines</h5>
-                <p class="text-sm text-slate-500">Across 4 categories to get you started in seconds.</p>
-            </div>
-            <div class="p-8 glass-card rounded-3xl">
-                <i data-lucide="shield-check" class="text-emerald-500 mb-4"></i>
-                <h5 class="font-bold mb-2">100% Private</h5>
-                <p class="text-sm text-slate-500">No cloud. No accounts. Your data never leaves your device.</p>
-            </div>
-            <div class="p-8 glass-card rounded-3xl">
-                <i data-lucide="book-open" class="text-emerald-500 mb-4"></i>
-                <h5 class="font-bold mb-2">Integrated Journal</h5>
-                <p class="text-sm text-slate-500">Reflection notes for every completion to track your growth.</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="max-w-5xl mx-auto px-6 mb-24">
-        
-    </div>
-
-    <footer class="py-20 border-t border-white/5 text-center px-6">
-        <div class="flex justify-center gap-6 mb-10">
+    <footer class="py-20 border-t border-white/5 text-center px-4">
+        <p class="text-xl md:text-2xl font-black italic tracking-tighter mb-4 uppercase">ConsistentMe <span class="text-emerald-500">by TJXLABS</span></p>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-10">
             <a href="privacy-policy" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-widest">Privacy</a>
-            <a href="support" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-widest">Support</a>
             <a href="mailto:tjxlabs@gmail.com" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-widest">Contact</a>
         </div>
-        <p class="text-2xl font-black italic tracking-tighter mb-4">ConsistentMe <span class="text-emerald-500">by TJXLABS</span></p>
         <p class="text-[10px] text-slate-700 font-bold uppercase tracking-[0.4em]">© 2026 TJXLABS // SYDNEY, AUSTRALIA</p>
     </footer>
 
@@ -159,4 +131,3 @@
     </script>
 </body>
 </html>
-
