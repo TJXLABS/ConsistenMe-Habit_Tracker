@@ -3,339 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ConsistentMe - Build better habits, one day at a time. Track streaks, earn badges, analyze mood, and stay consistent. Coming soon to Google Play.">
-    <title>ConsistentMe - Habit Tracker & Streak Builder</title>
+    <title>ConsistentMe | Master Your Habits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;500;800&display=swap');
+        
+        :root { font-family: 'Bricolage Grotesque', sans-serif; }
+        body { background-color: #020617; color: #f8fafc; }
+
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover { 
+            background: rgba(16, 185, 129, 0.05); 
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateY(-8px);
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #e5e5e5;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            min-height: 100vh;
+        .streak-glow {
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            color: white;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #2E7D68 0%, #3a9d82 100%);
-            border-radius: 30px;
-            margin: 0 auto 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+        .emerald-gradient {
+            background: linear-gradient(to bottom, #ffffff 20%, #10b981 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .tagline {
-            font-size: 1.3em;
-            opacity: 0.85;
-            margin-bottom: 30px;
-            color: #b0b0b0;
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #2E7D68 0%, #3a9d82 100%);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-            background: linear-gradient(135deg, #3a9d82 0%, #4ab896 100%);
-        }
-
-        .cta-button.disabled {
-            opacity: 0.6;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        .cta-button.secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #e0e0e0;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .cta-button.secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .coming-soon-badge {
-            display: inline-block;
-            background: rgba(234, 179, 8, 0.2);
-            color: #facc15;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
-            margin-top: 15px;
-            border: 1px solid rgba(234, 179, 8, 0.3);
-        }
-
-        .features {
-            background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%);
-            border-radius: 20px;
-            padding: 60px 40px;
-            margin: 40px 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 50px;
-            color: #ffffff;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .feature:hover {
-            background: rgba(46, 125, 104, 0.1);
-            border-color: rgba(46, 125, 104, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .feature-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .feature h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-
-        .feature p {
-            color: #b0b0b0;
-        }
-
-        .privacy {
-            background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            margin: 40px 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .privacy h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        .privacy > p {
-            color: #b0b0b0;
-        }
-
-        .privacy-features {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .privacy-item {
-            font-size: 1.1em;
-            color: #d0d0d0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #b0b0b0;
-        }
-
-        footer a {
-            color: #d0d0d0;
-            text-decoration: none;
-            margin: 0 15px;
-            opacity: 0.9;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        footer a:hover {
-            opacity: 1;
-            color: white;
-            border-bottom-color: rgba(255, 255, 255, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .tagline {
-                font-size: 1.1em;
-            }
-
-            .features {
-                padding: 40px 20px;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .privacy-features {
-                gap: 20px;
-            }
-        }
+        .animate-pulse-soft { animation: pulse-soft 3s infinite; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <div class="logo"><img src="app_icon.png" alt="ConsistentMe" style="width: 100%; height: 100%; border-radius: 30px; object-fit: cover;"></div>
-            <h1>ConsistentMe</h1>
-            <p class="tagline">Build better habits, one day at a time</p>
-            <div>
-                <span class="cta-button disabled">Coming Soon on Google Play</span>
-                <a href="https://github.com/TJXLABS/ConsistentMe" class="cta-button secondary" target="_blank" rel="noopener">View on GitHub</a>
-            </div>
-            <p class="coming-soon-badge">Coming Soon</p>
-        </header>
+<body class="selection:bg-emerald-500/30">
 
-        <section class="features">
-            <h2>Features</h2>
-
-            <div class="feature-grid">
-                <div class="feature">
-                    <div class="feature-icon">&#9989;</div>
-                    <h3>Habit Tracking</h3>
-                    <p>Create daily, weekly, or monthly habits with custom icons and colors</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#128680;</div>
-                    <h3>Emergency Mode</h3>
-                    <p>Complete a reduced version on tough days and keep your streak alive</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#128293;</div>
-                    <h3>Streak Tracking</h3>
-                    <p>Track current and longest streaks with habit strength meter</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#127942;</div>
-                    <h3>22 Badges</h3>
-                    <p>Earn achievements for milestones, consistency, and special accomplishments</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#128522;</div>
-                    <h3>Mood Tracking</h3>
-                    <p>Rate your mood 1-5 and discover which habits boost it</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#128200;</div>
-                    <h3>Analytics</h3>
-                    <p>Charts, heatmaps, and statistics to visualize your progress</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#128214;</div>
-                    <h3>Journal</h3>
-                    <p>Write reflections and review completion notes</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#128640;</div>
-                    <h3>Premade Routines</h3>
-                    <p>17 curated routines across 4 categories to get started fast</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">&#128190;</div>
-                    <h3>Backup & Restore</h3>
-                    <p>Export and import your data as JSON</p>
+    <header class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-500/10 blur-[120px] rounded-full -z-10"></div>
+        
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="mb-10 flex justify-center">
+                <div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-700 rounded-[2.5rem] flex items-center justify-center text-5xl shadow-[0_0_50px_-10px_rgba(16,185,129,0.5)] border border-white/20">
+                    <img src="app_icon.png" alt="CM" class="w-full h-full rounded-[2.5rem] object-cover" onerror="this.parentElement.innerHTML='🔥'">
                 </div>
             </div>
-        </section>
-
-        <section class="privacy">
-            <h2>Your Privacy Matters</h2>
-            <p style="font-size: 1.1em; margin-bottom: 20px;">All your data stays on your device. No cloud storage, no tracking.</p>
-
-            <div class="privacy-features">
-                <div class="privacy-item">100% Local Storage</div>
-                <div class="privacy-item">No Account Required</div>
-                <div class="privacy-item">No Ads</div>
-                <div class="privacy-item">No Tracking</div>
-            </div>
-        </section>
-
-        <footer>
-            <p><strong>ConsistentMe</strong> by TJXLABS</p>
-            <p style="margin: 20px 0;">
-                <a href="privacy-policy">Privacy Policy</a>
-                <a href="terms-of-service">Terms of Service</a>
-                <a href="mailto:tjxlabs@gmail.com">Contact</a>
+            
+            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 emerald-gradient">
+                ConsistentMe
+            </h1>
+            
+            <p class="text-slate-400 text-xl md:text-2xl max-w-2xl mx-auto mb-12 font-light tracking-tight">
+                Forge unbreakable habits. Track streaks, earn badges, and stay <span class="text-emerald-400 font-medium">consistent</span> even on your worst days.
             </p>
-            <p style="opacity: 0.8; font-size: 0.9em;">&copy; 2025 TJXLABS. All rights reserved.</p>
-        </footer>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+                <div class="bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 px-10 py-5 rounded-2xl font-extrabold text-lg flex items-center justify-center gap-3 cursor-not-allowed">
+                    <i data-lucide="clock" class="animate-spin-slow"></i> COMING SOON
+                </div>
+                <a href="https://github.com/TJXLABS/ConsistentMe" class="glass-card px-10 py-5 rounded-2xl font-extrabold text-lg flex items-center justify-center gap-2 hover:bg-white/5 transition">
+                    <i data-lucide="github"></i> VIEW CODE
+                </a>
+            </div>
+
+            <div class="inline-flex items-center gap-3 px-5 py-2 glass-card rounded-full text-xs font-bold text-amber-400 uppercase tracking-widest border-amber-500/20">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                </span>
+                In Active Development
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6">
+            
+            <div class="md:col-span-2 md:row-span-2 glass-card p-10 rounded-[3rem] flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400 mb-8">
+                        <i data-lucide="flame" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4">The Streak Engine</h3>
+                    <p class="text-slate-400 text-lg leading-relaxed">Advanced tracking for daily, weekly, or monthly cadences. Includes a unique <span class="text-white">Habit Strength Meter</span> that visualizes your consistency over time.</p>
+                </div>
+                <div class="mt-8 pt-8 border-t border-white/5">
+                    <p class="text-[10px] font-black tracking-widest text-emerald-500 uppercase">Frequency: Multiple Completions Supported</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 glass-card p-10 rounded-[3rem] border-red-500/10 hover:border-red-500/30">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center text-red-400">
+                        <i data-lucide="alert-circle"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">Emergency Mode</h3>
+                </div>
+                <p class="text-slate-400">Tough day? Complete a reduced version of your habit to keep the streak alive without the burnout.</p>
+            </div>
+
+            <div class="glass-card p-8 rounded-[2.5rem] flex flex-col items-center text-center">
+                <div class="text-3xl mb-4">😊</div>
+                <h4 class="font-bold mb-2">Mood Sync</h4>
+                <p class="text-xs text-slate-500">Discover which habits actually boost your mental state.</p>
+            </div>
+
+            <div class="glass-card p-8 rounded-[2.5rem] flex flex-col items-center text-center">
+                <div class="text-3xl mb-4">🏆</div>
+                <h4 class="font-bold mb-2">22 Badges</h4>
+                <p class="text-xs text-slate-500">Unlock achievements as you hit major milestones.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 glass-card rounded-3xl">
+                <i data-lucide="layout" class="text-emerald-500 mb-4"></i>
+                <h5 class="font-bold mb-2">17 Premade Routines</h5>
+                <p class="text-sm text-slate-500">Across 4 categories to get you started in seconds.</p>
+            </div>
+            <div class="p-8 glass-card rounded-3xl">
+                <i data-lucide="shield-check" class="text-emerald-500 mb-4"></i>
+                <h5 class="font-bold mb-2">100% Private</h5>
+                <p class="text-sm text-slate-500">No cloud. No accounts. Your data never leaves your device.</p>
+            </div>
+            <div class="p-8 glass-card rounded-3xl">
+                <i data-lucide="book-open" class="text-emerald-500 mb-4"></i>
+                <h5 class="font-bold mb-2">Integrated Journal</h5>
+                <p class="text-sm text-slate-500">Reflection notes for every completion to track your growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-5xl mx-auto px-6 mb-24">
+        
     </div>
+
+    <footer class="py-20 border-t border-white/5 text-center px-6">
+        <div class="flex justify-center gap-6 mb-10">
+            <a href="privacy-policy" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-widest">Privacy</a>
+            <a href="support" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-widest">Support</a>
+            <a href="mailto:tjxlabs@gmail.com" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-widest">Contact</a>
+        </div>
+        <p class="text-2xl font-black italic tracking-tighter mb-4">ConsistentMe <span class="text-emerald-500">by TJXLABS</span></p>
+        <p class="text-[10px] text-slate-700 font-bold uppercase tracking-[0.4em]">© 2026 TJXLABS // SYDNEY, AUSTRALIA</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
+
